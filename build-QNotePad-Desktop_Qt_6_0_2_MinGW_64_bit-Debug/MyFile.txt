@@ -1,0 +1,13 @@
+ QString file_name = QFileDialog::getSaveFileName(this, "Open the file");
+    QFile file(file_name);
+    if(!file.open(QFile::WriteOnly | QFile::Text))
+    {
+        QMessageBox::warning(this, ".." , "file not open");
+        return;
+    }    
+//
+    QTextStream out(&file);
+    QString text = ui->textEdit->toPlainText();
+    out << text;
+    file.flush();
+    file.close();
